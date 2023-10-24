@@ -60,8 +60,4 @@ public class StudentController {
         return repository.search(searchString);
     }
 
-    @GetMapping("/students/top")
-    List<Student> retrieveTopStudents() {
-        return repository.findTopStudents();
-    }
 }

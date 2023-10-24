@@ -31,7 +31,11 @@ public class RoomController
                 .orElseThrow(() -> new ClassroomNotFoundException(classroomCode));
     }
 
+    // GET BY BUILDING
 
+    // GET BY CAPACITY
+
+    // GET BY TECHNOLOGY?
 
 
 
