@@ -51,4 +51,8 @@ public class Event {
 
     @Nullable
     private int eventCapacity;
+
+    @OneToMany(mappedBy = "event")
+    @Nullable
+    private ArrayList<RSVP> rsvps = new ArrayList<>();
 }

@@ -2,20 +2,21 @@ package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.ClassroomNotFoundException;
 import com.example.cms.model.entity.Room;
-import com.example.cms.model.repository.ClassroomRepository;
+import com.example.cms.model.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// NEEDS COMPLETING //
 @CrossOrigin
 @RestController
-public class ClassroomController
+public class RoomController
 {
     @Autowired
-    private final ClassroomRepository repository;
+    private final RoomRepository repository;
 
-    public ClassroomController(ClassroomRepository repository) {
+    public RoomController(RoomRepository repository) {
         this.repository = repository;
     }
 
