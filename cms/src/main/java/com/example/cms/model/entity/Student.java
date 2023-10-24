@@ -21,8 +21,10 @@ import java.util.List;
 @Table(name = "students")
 public class Student extends Person {
 
-    @OneToMany(mappedBy = "student")
     @Nullable
-    private List<CourseMark> marks  = new ArrayList<>();
+    private String faculty;
+
+    @Nullable
+    private String major;
 
 }

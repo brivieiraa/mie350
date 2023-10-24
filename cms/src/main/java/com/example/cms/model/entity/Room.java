@@ -4,27 +4,39 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "classrooms")
+@Table(name = "rooms")
 
-public class Classroom {
+public class Room {
 
     @Id
     @NotEmpty
-    private String code;
+    private String roomCode;
+
+    @NotEmpty
+    private String building;
+
+    @Nullable
+    private String roomType;
+
+    @Nullable
+    private List<String> techAvailable = new ArrayList<>();
 
     @NotEmpty
     private Integer capacity;
 
-    public Classroom(String code, int capacity) {
-        this.code = code;
+    public Room(String code, int capacity) {
+        this.roomCode = code;
         this.capacity = capacity;
     }
 
