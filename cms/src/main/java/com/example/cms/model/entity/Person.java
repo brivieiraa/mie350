@@ -30,6 +30,6 @@ public abstract class Person {
     private String email;
 
     @Nullable
-    private String initials;
+    private String uTorId;
 
 }
