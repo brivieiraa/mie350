@@ -24,7 +24,7 @@ public class Event {
 
     @Id
     @NotEmpty
-    private String eventCode;
+    private int eventCode;
 
     @NotEmpty
     private String eventName;
