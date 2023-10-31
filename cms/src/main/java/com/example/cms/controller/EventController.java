@@ -16,6 +16,8 @@ import com.example.cms.controller.exceptions.RoomNotFoundException;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +33,15 @@ public class EventController {
 
     public EventController(EventRepository repository) { this.repository = repository; }
 
+    @Autowired
+    private StudentGroupRepository studentGroupRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
     // GET ALL EVENTS
+    @GetMapping("/events")
+    List<Event> retrieveAllEvents() { return repository.findAll(); }
 
     // SEARCH BY MONTH
 
@@ -47,6 +57,25 @@ public class EventController {
 
     // CREATE EVENT
         // ADMIN ONLY
+    @PostMapping("/events")
+    Event createEvent(@RequestBody EventDto eventDto) {
+        Event newEvent = new Event();
+        newEvent.setEventCode(eventDto.getEventCode());
+        newEvent.setEventName(eventDto.getEventName());
+        newEvent.setEventType(eventDto.getEventType());
+        newEvent.setDescription(eventDto.getDescription());
+
+        StudentGroup group = studentGroupRepository.findById(eventDto.getGroupId()).orElseThrow(
+                () -> new StudentGroupNotFoundException(eventDto.getGroupId()));
+        newEvent.setStudentGroup(group);
+
+        Room room = roomRepository.findById(eventDto.getRoomCode()).orElseThrow(
+                () -> new RoomNotFoundException(eventDto.getRoomCode()));
+        newEvent.setRoom(room);
+
+
+    }
+
 
     // UPDATE EVENT
         // ADMIN ONLY
