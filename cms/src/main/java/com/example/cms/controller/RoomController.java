@@ -32,11 +32,25 @@ public class RoomController
     }
 
     // GET BY BUILDING
+    @GetMapping("/classrooms/{building}")
+    Room retrieveByBuilding(@PathVariable("building") String buildingCode) {
+        return repository.findById(buildingCode)
+                .orElseThrow(() -> new ClassroomNotFoundException("Building code " +  buildingCode));
+    }
 
     // GET BY CAPACITY
+    @GetMapping("/classrooms/{capacity}")
+    Room retrieveByCapacity(@PathVariable("capacity") String capacityNB) {
+        return repository.findById(capacityNB)
+                .orElseThrow(() -> new ClassroomNotFoundException("Capacity number " + capacityNB));
+    }
 
-    // GET BY TECHNOLOGY?
-
+    // GET BY TECHNOLOGY i.e projector, HDMI cable, apple cable
+    @GetMapping("/classrooms/{technology}")
+    Room retrieveByTechnology(@PathVariable("technology") String technologyName) {
+        return repository.findById(technologyName)
+                .orElseThrow(() -> new ClassroomNotFoundException("Technology desired " + technologyName));
+    }
 
 
 }
