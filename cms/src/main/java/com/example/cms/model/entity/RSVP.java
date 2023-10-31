@@ -11,10 +11,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "RSVPs")
 public class RSVP {
 
+
     @EmbeddedId
-    RSVPKey rsvpKey;
+    com.example.cms.model.entity.RSVPKey rsvpKey;
 
     @ManyToOne
     @MapsId("studentId")
