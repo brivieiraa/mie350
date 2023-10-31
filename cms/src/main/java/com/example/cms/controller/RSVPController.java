@@ -1,6 +1,6 @@
 package com.example.cms.controller;
 import com.example.cms.controller.dto.RSVPDto;
-import com.example.cms.controller.exceptions.CourseNotFoundException;
+import com.example.cms.controller.exceptions.EventNotFoundException;
 import com.example.cms.controller.exceptions.StudentNotFoundException;
 import com.example.cms.model.entity.Event;
 import com.example.cms.model.entity.Student;
@@ -34,7 +34,7 @@ public class RSVPController {
         key.setEventCode(rsvpDto.getEventCode());
 
         Event event = eventRepository.findById(eventCode).orElseThrow(
-                () -> new CourseNotFoundException(eventCode));
+                () -> new EventNotFoundException(eventCode));
         Student student = studentRepository.findById(studentId).orElseThrow(
                 () -> new StudentNotFoundException(studentId));
 
