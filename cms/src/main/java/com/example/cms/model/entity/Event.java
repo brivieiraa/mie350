@@ -12,7 +12,6 @@ import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
-import java.sql.Time;
 
 @Entity
 @NoArgsConstructor
@@ -41,7 +40,7 @@ public class Event {
     private Date date;
 
     @NotEmpty
-    private Time time;
+    private double duration;
 
     @Nullable
     private String description;

@@ -15,7 +15,8 @@ import com.example.cms.model.repository.RoomRepository;
 import com.example.cms.controller.exceptions.RoomNotFoundException;
 
 import java.sql.Date;
-import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,13 @@ public class EventController {
     @GetMapping("/events")
     List<Event> retrieveAllEvents() { return repository.findAll(); }
 
+    // GET BY CODE
+    @GetMapping("/events/{code}")
+    Event retriveEvent(@PathVariable("code") int eventCode) {
+        return repository.findById(eventCode)
+                .orElseThrow(() -> new EventNotFoundException(eventCode));
+    }
+
     // SEARCH BY MONTH
 
     // SEARCH BY DATE
@@ -58,12 +66,13 @@ public class EventController {
     // CREATE EVENT
         // ADMIN ONLY
     @PostMapping("/events")
-    Event createEvent(@RequestBody EventDto eventDto) {
+    Event createEvent(@RequestBody EventDto eventDto) throws ParseException {
         Event newEvent = new Event();
         newEvent.setEventCode(eventDto.getEventCode());
         newEvent.setEventName(eventDto.getEventName());
         newEvent.setEventType(eventDto.getEventType());
         newEvent.setDescription(eventDto.getDescription());
+        newEvent.setDuration(eventDto.getDuration());
 
         StudentGroup group = studentGroupRepository.findById(eventDto.getGroupId()).orElseThrow(
                 () -> new StudentGroupNotFoundException(eventDto.getGroupId()));
@@ -73,13 +82,101 @@ public class EventController {
                 () -> new RoomNotFoundException(eventDto.getRoomCode()));
         newEvent.setRoom(room);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = (Date) sdf.parse(eventDto.getDate());
+        newEvent.setDate(date);
 
+        // make sure capacity is at or below room capacity
+        int capacity = eventDto.getEventCapacity();
+        if (capacity > room.getCapacity()) {
+            capacity = room.getCapacity();
+            newEvent.setEventCapacity(capacity);
+        }
+        else {
+            newEvent.setEventCapacity(capacity);
+        }
     }
-
 
     // UPDATE EVENT
         // ADMIN ONLY
+    @PutMapping("/events/{code}")
+    Event updateEvent(@RequestBody EventDto eventDto, @PathVariable("code") int eventCode) {
+        return repository.findById(eventCode)
+                .map(event -> {
+                    event.setEventName(eventDto.getEventName());
+                    event.setEventType(eventDto.getEventType());
+                    event.setDescription(eventDto.getDescription());
+                    event.setDuration(eventDto.getDuration());
+
+                    StudentGroup group = studentGroupRepository.findById(eventDto.getGroupId()).orElseThrow(
+                            () -> new StudentGroupNotFoundException(eventDto.getGroupId()));
+                    event.setStudentGroup(group);
+
+                    Room room = roomRepository.findById(eventDto.getRoomCode()).orElseThrow(
+                            () -> new RoomNotFoundException(eventDto.getRoomCode()));
+                    event.setRoom(room);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = null;
+                    try {
+                        date = (Date) sdf.parse(eventDto.getDate());
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    event.setDate(date);
+
+                    // make sure capacity is at or below room capacity
+                    int capacity = eventDto.getEventCapacity();
+                    if (capacity > room.getCapacity()) {
+                        capacity = room.getCapacity();
+                        event.setEventCapacity(capacity);
+                    }
+                    else {
+                        event.setEventCapacity(capacity);
+                    }
+
+                    return repository.save(event);
+                })
+                .orElseGet(() -> {
+                    Event newEvent = new Event();
+                    newEvent.setEventCode(eventCode);
+                    newEvent.setEventName(eventDto.getEventName());
+                    newEvent.setEventType(eventDto.getEventType());
+                    newEvent.setDescription(eventDto.getDescription());
+                    newEvent.setDuration(eventDto.getDuration());
+
+                    StudentGroup group = studentGroupRepository.findById(eventDto.getGroupId()).orElseThrow(
+                            () -> new StudentGroupNotFoundException(eventDto.getGroupId()));
+                    newEvent.setStudentGroup(group);
+
+                    Room room = roomRepository.findById(eventDto.getRoomCode()).orElseThrow(
+                            () -> new RoomNotFoundException(eventDto.getRoomCode()));
+                    newEvent.setRoom(room);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = null;
+                    try {
+                        date = (Date) sdf.parse(eventDto.getDate());
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    newEvent.setDate(date);
+
+                    // make sure capacity is at or below room capacity
+                    int capacity = eventDto.getEventCapacity();
+                    if (capacity > room.getCapacity()) {
+                        capacity = room.getCapacity();
+                        newEvent.setEventCapacity(capacity);
+                    }
+                    else {
+                        newEvent.setEventCapacity(capacity);
+                    }
+                    return repository.save(newEvent);
+                });
+    }
 
     // DELETE EVENT
         // ADMIN ONLY
+    @DeleteMapping("/events/{code}")
+    void deleteEvent(@PathVariable("code") int eventCode) { repository.deleteById(eventCode); }
 }

@@ -11,8 +11,8 @@ public class EventDto {
     private String eventName;
     private String groupId;
     private String roomCode;
-    private String date;
-    private String time;
+    private String date;        // in format "yyyy/MM/dd HH:mm:ss"
+    private double duration;
     private String description;
     private String eventType;
     private int eventCapacity;
