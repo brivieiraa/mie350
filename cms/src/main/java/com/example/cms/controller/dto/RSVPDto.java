@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class RSVPDto {
     private long studentId;
-    private String eventCode;
+    private int eventCode;
 }

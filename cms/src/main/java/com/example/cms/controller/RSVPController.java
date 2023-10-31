@@ -27,7 +27,7 @@ public class RSVPController {
     RSVP createRSVP(@RequestBody RSVPDto rsvpDto) {
         RSVP newRSVP = new RSVP();
         long studentId = rsvpDto.getStudentId();
-        String eventCode = rsvpDto.getEventCode();
+        int eventCode = rsvpDto.getEventCode();
 
         RSVPKey key = new RSVPKey();
         key.setStudentId(rsvpDto.getStudentId());
@@ -54,3 +54,4 @@ public class RSVPController {
         repository.deleteById(key);
     }
 }
+

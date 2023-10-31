@@ -17,7 +17,7 @@ public class RSVPKey implements Serializable
     Long studentId;
 
     @Column(name = "eventCode")
-    String eventCode;
+    int eventCode;
 
     @Override
     public int hashCode()
@@ -27,7 +27,7 @@ public class RSVPKey implements Serializable
     }
     public RSVPKey(){}
 
-    public RSVPKey(Long studentId, String eventCode)
+    public RSVPKey(Long studentId, int eventCode)
     {
         this.setStudentId(studentId);
         this.setEventCode(eventCode);
