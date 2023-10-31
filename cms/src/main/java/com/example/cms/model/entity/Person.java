@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
+//BRIANA PUSH!!!!!!!
 @MappedSuperclass
 @NoArgsConstructor
 @Getter
