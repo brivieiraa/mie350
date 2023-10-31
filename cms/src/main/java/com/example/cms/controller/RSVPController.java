@@ -46,7 +46,7 @@ public class RSVPController {
 
     // REMOVE RSVP
     @DeleteMapping("/RSVP/{eventCode}/{studentID}")
-    void deleteRSVP(@PathVariable("eventCode") String eventCode,
+    void deleteRSVP(@PathVariable("eventCode") int eventCode,
                     @PathVariable("studentID") long studentID){
         RSVPKey key = new RSVPKey();
         key.setEventCode(eventCode);
