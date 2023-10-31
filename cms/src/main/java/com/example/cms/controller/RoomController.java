@@ -1,6 +1,7 @@
 package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.ClassroomNotFoundException;
+import com.example.cms.controller.exceptions.RoomNotFoundException;
 import com.example.cms.model.entity.Room;
 import com.example.cms.model.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class RoomController
     }
 
     // GET BY BUILDING
+    @GetMapping("/classrooms/{building}")
+    Room retrieveByBuilding(@PathVariable("building") String buildingCode) {
+        return repository.findById(buildingCode)
+                .orElseThrow(() -> new RoomNotFoundException(buildingCode));
+    }
+
+
+
 
     // GET BY CAPACITY
 
