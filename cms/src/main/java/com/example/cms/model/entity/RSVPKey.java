@@ -23,7 +23,7 @@ public class RSVPKey implements Serializable
     public int hashCode()
     {
         String concatString = String.valueOf(studentId.hashCode()) + String.valueOf(eventCode.hashCode());
-        return concatString.hashCode()
+        return concatString.hashCode();
     }
     public RSVPKey(){}
 
