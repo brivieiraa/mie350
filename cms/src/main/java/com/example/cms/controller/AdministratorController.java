@@ -28,7 +28,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/admins/{id}") // find admin by id
-    Student retrieveStudent(@PathVariable("id") Long id) {
+    Administrator retrieveAdmin(@PathVariable("id") Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new AdminNotFoundException(id)); // Need to create AdminNotFoundException
     }
