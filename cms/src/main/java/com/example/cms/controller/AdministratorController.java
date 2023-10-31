@@ -1,6 +1,6 @@
 package com.example.cms.controller;
 
-import com.example.cms.controller.exceptions.StudentNotFoundException;
+import com.example.cms.controller.exceptions.AdminNotFoundException;
 import com.example.cms.model.entity.Administrator;
 import com.example.cms.model.entity.Student;
 import com.example.cms.model.repository.AdministratorRepository;
