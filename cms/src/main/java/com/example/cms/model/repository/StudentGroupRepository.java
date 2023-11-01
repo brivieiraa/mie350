@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 // NEEDS COMPLETING //
 @Repository
-public interface StudentGroupRepository extends JpaRepository<StudentGroup, String> {
+public interface StudentGroupRepository extends JpaRepository<StudentGroup, Integer> {
 }
