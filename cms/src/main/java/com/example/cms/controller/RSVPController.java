@@ -12,6 +12,8 @@ import com.example.cms.model.entity.RSVP;
 import com.example.cms.model.entity.RSVPKey;
 import com.example.cms.model.repository.RSVPRepository;
 
+@CrossOrigin
+@RestController
 public class RSVPController {
     @Autowired
     private RSVPRepository repository;
