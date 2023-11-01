@@ -36,7 +36,7 @@ INSERT INTO events (eventCode, eventName, studentGroup, room, dateTime, duration
 INSERT INTO events (eventCode, eventName, studentGroup, room, dateTime, duration, description, eventType, eventCapacity) VALUES (8, 'IMI Big Data & Artificial Intelligence Competition', IMIUofT, Online, '2023/11/25 11:30:01', 1.5, 'This competition is free to enter and is open to graduate students and undergrads with big data/AI experience from any academic discipline in any year of their academic career at the University of Toronto. Please note this is geared towards graduate and undergraduate students with experience in big data and artificial intelligence.', 'Academic', 100);
 */
 
-iNSERT INTO RSVPs (studentId, eventCode) VALUES (2222, 1)
+INSERT INTO RSVPs (studentId, eventCode) VALUES (2222, 1)
 
 /*these will not be used and we can delete*/
 /*
