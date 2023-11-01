@@ -24,7 +24,7 @@ public class StudentGroupController {
 
     // SEARCH BY ID
     @GetMapping("/studentgroups/{code}")
-    StudentGroup retrieveStudentGroup(@PathVariable("code") String groupId) {
+    StudentGroup retrieveStudentGroup(@PathVariable("code") Integer groupId) {
         return repository.findById(groupId)
                 .orElseThrow(() -> new StudentGroupNotFoundException(groupId));
     }

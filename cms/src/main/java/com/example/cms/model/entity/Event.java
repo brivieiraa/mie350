@@ -25,7 +25,7 @@ public class Event {
 
     @Id
     @NotEmpty
-    private int eventCode;
+    private Integer eventCode;
 
     @NotEmpty
     private String eventName;
@@ -53,7 +53,7 @@ public class Event {
     @Nullable
     private int eventCapacity;
 
-//    @OneToMany(mappedBy = "events")
-//    @Nullable
-//    private ArrayList<RSVP> rsvps = new ArrayList<RSVP>();
+    @OneToMany(mappedBy = "event")
+    @Nullable
+    private List<RSVP> rsvps = new ArrayList<RSVP>();
 }

@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RSVPDto {
-    private long studentId;
-    private int eventCode;
+    private Long studentId;
+    private Integer eventCode;
 }

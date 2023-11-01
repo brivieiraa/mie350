@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 
 public class EventDto {
-    private int eventCode;
+    private Integer eventCode;
     private String eventName;
-    private String groupId;
+    private Integer groupId;
     private String roomCode;
     private String date;        // in format "yyyy/MM/dd HH:mm:ss"
     private double duration;

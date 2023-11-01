@@ -17,12 +17,12 @@ public class RSVPKey implements Serializable
     Long studentId;
 
     @Column(name = "eventCode")
-    int eventCode;
+    Integer eventCode;
 
     @Override
     public int hashCode()
     {
-        String concatString =  Integer.toString(eventCode) + String.valueOf(studentId.hashCode()) ;
+        String concatString = String.valueOf(eventCode.hashCode()) + String.valueOf(studentId.hashCode()) ;
         return concatString.hashCode();
     }
     public RSVPKey(){}
@@ -37,8 +37,9 @@ public class RSVPKey implements Serializable
     public boolean equals(Object o)
     {
         if (o == null) {return false;}
+        if (o == this) { return true;}
         if (!(o instanceof RSVPKey)) {return false;}
         RSVPKey other = (RSVPKey) o;
-        return studentId.equals(other.studentId) && (eventCode == (other.eventCode));
+        return studentId.equals(other.studentId) && (eventCode.equals(other.eventCode));
     }
 }

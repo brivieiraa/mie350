@@ -1,4 +1,5 @@
 package com.example.cms.controller;
+
 import com.example.cms.controller.dto.RSVPDto;
 import com.example.cms.controller.exceptions.EventNotFoundException;
 import com.example.cms.controller.exceptions.StudentNotFoundException;
@@ -11,29 +12,37 @@ import org.springframework.web.bind.annotation.*;
 import com.example.cms.model.entity.RSVP;
 import com.example.cms.model.entity.RSVPKey;
 import com.example.cms.model.repository.RSVPRepository;
+import java.util.List;
 
 @CrossOrigin
 @RestController
 public class RSVPController {
     @Autowired
-    private RSVPRepository repository;
+    private final RSVPRepository repository;
+
     @Autowired
     private StudentRepository studentRepository;
+
     @Autowired
     private EventRepository eventRepository;
 
-    
+    public RSVPController(RSVPRepository repository) { this.repository = repository; }
+
+    // SEE RSVPS
+    @GetMapping("/rsvp")
+    List<RSVP> retrieveAllRsvps() { return repository.findAll(); }
+
 
     // ADD RSVP
-    @PostMapping("/RSVP")
+    @PostMapping("/rsvp")
     RSVP createRSVP(@RequestBody RSVPDto rsvpDto) {
         RSVP newRSVP = new RSVP();
-        long studentId = rsvpDto.getStudentId();
-        int eventCode = rsvpDto.getEventCode();
+        Long studentId = rsvpDto.getStudentId();
+        Integer eventCode = rsvpDto.getEventCode();
 
-        RSVPKey key = new RSVPKey();
-        key.setStudentId(rsvpDto.getStudentId());
-        key.setEventCode(rsvpDto.getEventCode());
+        RSVPKey rsvpkey = new RSVPKey();
+        rsvpkey.setStudentId(rsvpDto.getStudentId());
+        rsvpkey.setEventCode(rsvpDto.getEventCode());
 
         Event event = eventRepository.findById(eventCode).orElseThrow(
                 () -> new EventNotFoundException(eventCode));
@@ -42,12 +51,13 @@ public class RSVPController {
 
         newRSVP.setStudent(student);
         newRSVP.setEvent(event);
+        newRSVP.setRsvpKey(rsvpkey);
 
         return repository.save(newRSVP);
     }
 
     // REMOVE RSVP
-    @DeleteMapping("/RSVP/{eventCode}/{studentID}")
+    @DeleteMapping("/rsvp/{eventCode}/{studentID}")
     void deleteRSVP(@PathVariable("eventCode") int eventCode,
                     @PathVariable("studentID") long studentID){
         RSVPKey key = new RSVPKey();
