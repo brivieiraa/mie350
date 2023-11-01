@@ -14,7 +14,10 @@ import com.example.cms.model.entity.Room;
 import com.example.cms.model.repository.RoomRepository;
 import com.example.cms.controller.exceptions.RoomNotFoundException;
 
-import java.sql.Date;
+import java.text.ParsePosition;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -82,9 +85,13 @@ public class EventController {
                 () -> new RoomNotFoundException(eventDto.getRoomCode()));
         newEvent.setRoom(room);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = (Date) sdf.parse(eventDto.getDate());
+        String date = eventDto.getDate();
         newEvent.setDate(date);
+
+        // IDK IF WE WANT TO TRY TO FIGURE OUT HOW TO USE DATE OBJECTS INSTEAD OF JUST STRINGS
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        //Date date = sdf.parse(eventDto.getDate());
+        //newEvent.setDate(date);
 
         // make sure capacity is at or below room capacity
         int capacity = eventDto.getEventCapacity();
@@ -117,14 +124,14 @@ public class EventController {
                             () -> new RoomNotFoundException(eventDto.getRoomCode()));
                     event.setRoom(room);
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    Date date = null;
-                    try {
-                        date = (Date) sdf.parse(eventDto.getDate());
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
+                    String date = eventDto.getDate();
                     event.setDate(date);
+
+                    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    //sdf.setLenient(true);
+                    //String dateStr = eventDto.getDate();
+                    //Date newDate = sdf.parse(dateStr, new ParsePosition(0));
+                    //event.setDate(newDate);
 
                     // make sure capacity is at or below room capacity
                     int capacity = eventDto.getEventCapacity();
@@ -154,14 +161,16 @@ public class EventController {
                             () -> new RoomNotFoundException(eventDto.getRoomCode()));
                     newEvent.setRoom(room);
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    Date date = null;
-                    try {
-                        date = (Date) sdf.parse(eventDto.getDate());
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
+                    String date = eventDto.getDate();
                     newEvent.setDate(date);
+
+                    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    //try {
+                    //    Date date = sdf.parse(eventDto.getDate());
+                    //    newEvent.setDate(date);
+                    //} catch (ParseException e) {
+                    //    throw new RuntimeException(e);
+                    //}
 
                     // make sure capacity is at or below room capacity
                     int capacity = eventDto.getEventCapacity();

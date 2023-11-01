@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
+import java.util.Date;
 
 import java.time.LocalDate;
 
@@ -24,7 +24,7 @@ import java.time.LocalDate;
 public class Event {
 
     @Id
-    @NotEmpty
+    @NotNull
     private Integer eventCode;
 
     @NotEmpty
@@ -39,9 +39,9 @@ public class Event {
     private Room room;
 
     @NotEmpty
-    private Date date;
+    private String date;
 
-    @NotEmpty
+    @NotNull
     private double duration;
 
     @Nullable
