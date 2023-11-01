@@ -19,7 +19,7 @@ public class StudentGroup {
 
     @Id
     @NotEmpty
-    private String groupId;
+    private int groupId;
 
     @NotEmpty
     private String name;

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
 
+import java.time.LocalDate;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -51,7 +53,7 @@ public class Event {
     @Nullable
     private int eventCapacity;
 
-    @OneToMany(mappedBy = "event")
-    @Nullable
-    private ArrayList<RSVP> rsvps = new ArrayList<>();
+//    @OneToMany(mappedBy = "event")
+//    @Nullable
+//    private ArrayList<RSVP> rsvps = new ArrayList<>();
 }

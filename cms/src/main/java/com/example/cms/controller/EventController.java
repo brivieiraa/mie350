@@ -95,6 +95,7 @@ public class EventController {
         else {
             newEvent.setEventCapacity(capacity);
         }
+        return repository.save(newEvent);
     }
 
     // UPDATE EVENT

@@ -29,8 +29,8 @@ public class Room {
     @Nullable
     private String roomType;
 
-    @Nullable
-    private List<String> techAvailable = new ArrayList<>();
+//    @Nullable
+//    private List<String> techAvailable = new ArrayList<String>();
 
     @NotEmpty
     private Integer capacity;
