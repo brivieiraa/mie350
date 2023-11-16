@@ -27,4 +27,7 @@ public class Student extends Person {
     @Nullable
     private String major;
 
+    @OneToMany(mappedBy = "student")
+    @Nullable
+    private List<RSVP> rsvps = new ArrayList<RSVP>();
 }
