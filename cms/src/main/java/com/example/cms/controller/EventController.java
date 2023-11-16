@@ -55,16 +55,12 @@ public class EventController {
     }
 
     // SEARCH BY MONTH
-
     // SEARCH BY DATE
-
     // SEARCH BY CLUB
-
     // SEARCH BY NAME
-
     // SEARCH BY BUILDING
-
     // SEARCH BY ROOM
+    // ALREADY IMPLEMENTED AS FEATURE IN FRONT END
 
     // CREATE EVENT
         // ADMIN ONLY
@@ -95,7 +91,7 @@ public class EventController {
 
         // make sure capacity is at or below room capacity
         int capacity = eventDto.getEventCapacity();
-        if (capacity > room.getCapacity()) {
+        if ((capacity > room.getCapacity()) /*|| (capacity == null)*/) {
             capacity = room.getCapacity();
             newEvent.setEventCapacity(capacity);
         }
