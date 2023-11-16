@@ -26,7 +26,7 @@ public class StudentGroupTests {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private StudentGroupRepository professorRepository;
+    private StudentGroupRepository studentGroupRepository;
 
     @Test
     void getStudentGroup() throws Exception{
