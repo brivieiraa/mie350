@@ -30,12 +30,10 @@ public class Event {
     @NotEmpty
     private String eventName;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "studentGroup")
     private StudentGroup studentGroup;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "roomCode")
     private Room room;
