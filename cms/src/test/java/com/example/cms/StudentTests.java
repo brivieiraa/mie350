@@ -39,15 +39,19 @@ class StudentTests {
 
 	@Test
 	void getStudent() throws Exception{
-		MockHttpServletResponse response = mockMvc.perform(get("/students/1111"))
+		MockHttpServletResponse response = mockMvc.perform(get("/students/1001"))
 				.andReturn().getResponse();
 
 		assertEquals(200, response.getStatus());
 
 		ObjectNode receivedJson = objectMapper.readValue(response.getContentAsString(), ObjectNode.class);
-		assertEquals(1111L, receivedJson.get("id").longValue());
-		assertEquals("Tyrion", receivedJson.get("firstName").textValue());
-		assertEquals("Lannister", receivedJson.get("lastName").textValue());
+		assertEquals(1001L, receivedJson.get("id").longValue());
+		assertEquals("Adam", receivedJson.get("firstName").textValue());
+		assertEquals("Mainella", receivedJson.get("lastName").textValue());
+		assertEquals("a.mainella@mail.utoronto.ca", receivedJson.get("email").textValue());
+		assertEquals("mainell3", receivedJson.get("utorId").textValue());
+		assertEquals("FASE", receivedJson.get("faculty").textValue());
+		assertEquals("Industrial Engineering", receivedJson.get("major").textValue());
 	}
 
 	@Test
@@ -58,6 +62,9 @@ class StudentTests {
 		studentJson.put("firstName", "first");
 		studentJson.put("lastName", "last");
 		studentJson.put("email", "first@last.com");
+		studentJson.put("utorId", "flast1");
+		studentJson.put("faculty", "FASE");
+		studentJson.put("major", "Mechanical Engineering");
 
 		MockHttpServletResponse response = mockMvc.perform(
 				post("/students").
@@ -77,6 +84,9 @@ class StudentTests {
 		assertEquals("first", addedStudent.getFirstName());
 		assertEquals("last", addedStudent.getLastName());
 		assertEquals("first@last.com", addedStudent.getEmail());
+		assertEquals("flast1", addedStudent.getUTorId());
+		assertEquals("FASE", addedStudent.getFaculty());
+		assertEquals("Mechanical Engineering", addedStudent.getMajor());
 	}
 
 	@Test
