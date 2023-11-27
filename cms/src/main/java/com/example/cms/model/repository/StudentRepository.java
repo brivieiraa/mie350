@@ -24,4 +24,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             "group by s.id HAVING AVG(Mark) >= 90)", nativeQuery = true)
     List<Student> findTopStudents();
 
+    //Is this a valid way to pull all student ids
+    @Query(value = "select s.id from students s", nativeQuery = true)
+    List<Long> studentIds();
+
 }

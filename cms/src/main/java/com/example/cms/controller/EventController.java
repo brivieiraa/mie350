@@ -14,6 +14,10 @@ import com.example.cms.model.entity.Room;
 import com.example.cms.model.repository.RoomRepository;
 import com.example.cms.controller.exceptions.RoomNotFoundException;
 
+import com.example.cms.model.repository.StudentRepository;
+import com.example.cms.model.repository.RSVPRepository;
+import com.example.cms.controller.RSVPController;
+
 import java.text.ParsePosition;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,6 +46,12 @@ public class EventController {
 
     @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private RSVPRepository rsvpRepository;
 
     // GET ALL EVENTS
     @GetMapping("/events")
@@ -184,5 +194,23 @@ public class EventController {
     // DELETE EVENT
         // ADMIN ONLY
     @DeleteMapping("/events/{code}")
-    void deleteEvent(@PathVariable("code") int eventCode) { repository.deleteById(eventCode); }
+    void deleteEvent(@PathVariable("code") int eventCode) {
+        //Need to delete all rsvps before being able to delete event (also applies to students) ///////////////////////////////////////////////////////////
+        List<Long> allStudentIds = studentRepository.studentIds();
+
+//        for(int i = 0; i < allStudentIds.size(); i++)
+//        {
+////            if(allStudentIds[i] == )
+////            {
+////                //RSVPController(rsvpRepository).deleteRSVP(eventCode, studentIds[i]);
+////                rsvpRepository.deleteById();
+////            }
+////            rsvpController
+////            RSVPController(rsvpRepository).deleteRSVP(eventCode, allStudentIDs[i]);
+//
+//            //rsvpRepository.deleteById(eventCode, allStudentIds[i]);
+//        }
+
+        repository.deleteById(eventCode);
+    }
 }

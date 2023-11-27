@@ -32,6 +32,11 @@ public class RSVPController {
     @GetMapping("/rsvp")
     List<RSVP> retrieveAllRsvps() { return repository.findAll(); }
 
+//    @GetMapping("/rsvps/{eventCode}")
+//    RSVP retrieveRSVP(@PathVariable("eventCode") Long eventCode) {
+//        return repository.findBy(eventCode)
+//                .orElseThrow(() -> new StudentNotFoundException(eventCode));
+//    }
 
     // ADD RSVP
     @PostMapping("/rsvp")
