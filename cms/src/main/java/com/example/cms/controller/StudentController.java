@@ -1,7 +1,10 @@
 package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.StudentNotFoundException;
+import com.example.cms.model.entity.RSVP;
+import com.example.cms.model.entity.RSVPKey;
 import com.example.cms.model.entity.Student;
+import com.example.cms.model.repository.RSVPRepository;
 import com.example.cms.model.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,9 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private final StudentRepository repository;
+
+    @Autowired
+    private RSVPRepository rsvpRepository;
 
     public StudentController(StudentRepository repository) {
         this.repository = repository;
@@ -51,7 +57,19 @@ public class StudentController {
     }
 
     @DeleteMapping("/students/{id}")
-    void deleteStudent(@PathVariable("id") Long studentId) {
+    void deleteStudent(@PathVariable("id") Long studentId)
+    {
+        List<Integer> eventRSVP = repository.findRsvpStudent(studentId);
+
+        if (!eventRSVP.isEmpty())
+        {
+            for (Integer eventCode : eventRSVP)
+            {
+                RSVPKey key = new RSVPKey(studentId, eventCode);
+                rsvpRepository.deleteById(key);
+            }
+        }
+
         repository.deleteById(studentId);
     }
 

@@ -221,13 +221,13 @@ public class EventController {
 ////            RSVPController(rsvpRepository).deleteRSVP(eventCode, allStudentIDs[i]);
 //        }
 
-        List<RSVP> eventRSVP = repository.findRsvpEvent(eventCode);
+        List<Long> studentRSVP = repository.findRsvpEvent(eventCode);
 
-        if (!eventRSVP.isEmpty())
+        if (!studentRSVP.isEmpty())
         {
-            for (RSVP rsvp : eventRSVP)
+            for (Long studentId : studentRSVP)
             {
-                RSVPKey key = rsvp.getRsvpKey();
+                RSVPKey key = new RSVPKey(studentId, eventCode);
                 rsvpRepository.deleteById(key);
             }
         }

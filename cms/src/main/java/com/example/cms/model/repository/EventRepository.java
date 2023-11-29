@@ -14,10 +14,7 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
-    @Query(value = "select * from rsvps where studentId = :id", nativeQuery = true)
-    List<RSVP> findRsvpStudent(@Param("id") long studentId);
-
-    @Query(value = "select * from rsvps where eventCode = :code", nativeQuery = true)
-    List<RSVP> findRsvpEvent(@Param("code") int eventCode);
+    @Query(value = "select studentId from rsvps where eventCode = :code", nativeQuery = true)
+    List<Long> findRsvpEvent(@Param("code") int eventCode);
 
 }

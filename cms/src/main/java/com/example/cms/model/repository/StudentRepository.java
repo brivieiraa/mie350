@@ -28,4 +28,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query(value = "select s.id from students s", nativeQuery = true)
     List<Long> studentIds();
 
+    @Query(value = "select eventCode from rsvps where studentId = :id", nativeQuery = true)
+    List<Integer> findRsvpStudent(@Param("id") long studentId);
+
 }
