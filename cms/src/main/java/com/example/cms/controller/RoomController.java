@@ -25,32 +25,30 @@ public class RoomController
         return repository.findAll();
     }
 
-    @GetMapping("/classrooms/{code}")
+    @GetMapping("/classrooms/code/{code}")
     Room retrieveClassroom(@PathVariable("code") String classroomCode) {
         return repository.findById(classroomCode)
                 .orElseThrow(() -> new RoomNotFoundException(classroomCode));
     }
 
     // GET BY BUILDING
-    @GetMapping("/classrooms/{building}")
-    Room retrieveByBuilding(@PathVariable("building") String buildingCode) {
-        return repository.findById(buildingCode)
-                .orElseThrow(() -> new RoomNotFoundException("Building code " +  buildingCode));
+    @GetMapping("/classrooms/building/{building}")
+    List<Room> retrieveListRoomsWithBuilding(@PathVariable("building") String buildingCode) {
+        return repository.searchRoomsInBuilding(buildingCode);
     }
 
     // GET BY CAPACITY
-    @GetMapping("/classrooms/{capacity}")
-    Room retrieveByCapacity(@PathVariable("capacity") String capacityNB) {
-        return repository.findById(capacityNB)
-                .orElseThrow(() -> new RoomNotFoundException("Capacity number " + capacityNB));
+    @GetMapping("/classrooms/capacity/{capacity}")
+    List<Room> retrieveListRoomsWithCapacity(@PathVariable("capacity") int capacityNB) {
+        return repository.searchRoomsByCapacity(capacityNB);
     }
 
-    // GET BY TECHNOLOGY i.e projector, HDMI cable, apple cable
-    @GetMapping("/classrooms/{technology}")
-    Room retrieveByTechnology(@PathVariable("technology") String technologyName) {
-        return repository.findById(technologyName)
-                .orElseThrow(() -> new RoomNotFoundException("Technology desired " + technologyName));
-    }
+//    // GET BY TECHNOLOGY i.e projector, HDMI cable, apple cable
+//    @GetMapping("/classrooms/{technology}")
+//    Room retrieveByTechnology(@PathVariable("technology") String technologyName) {
+//        return repository.findById(technologyName)
+//                .orElseThrow(() -> new RoomNotFoundException("Technology desired " + technologyName));
+//    }
 
 
 }

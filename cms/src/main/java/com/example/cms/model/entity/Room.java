@@ -30,7 +30,7 @@ public class Room {
     private String roomType;
 
 //    @Nullable
-//    private List<String> techAvailable = new ArrayList<String>();
+//    private List<Room> techAvailable = new ArrayList<>();
 
     @NotEmpty
     private Integer capacity;
