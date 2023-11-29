@@ -195,30 +195,41 @@ public class EventController {
         // ADMIN ONLY
     @DeleteMapping("/events/{code}")
     void deleteEvent(@PathVariable("code") int eventCode) {
-        //Need to delete all rsvps before being able to delete event (also applies to students) ///////////////////////////////////////////////////////////
-        List<Long> allStudentIds = studentRepository.studentIds();
+//        //Need to delete all rsvps before being able to delete event (also applies to students) ///////////////////////////////////////////////////////////
+//        List<Long> allStudentIds = studentRepository.studentIds();
+//
+//        for(int i = 0; i < allStudentIds.size(); i++)
+//        {
+//            //Make rsvp key w student id and event code
+//
+////            RSVPDto rsvpDto = new RSVPDto();
+////            rsvpDto.setStudentId(123456L); // Set the student ID
+////            rsvpDto.setEventCode(1); // Set the event code
+//
+//            //replace first allStudentIds with list of student ids from rsvp list
+//            if(allStudentIds.contains(allStudentIds.get(i)))
+//            {
+//                //Set up RSVP key, then delete
+//                RSVPKey tempRSVPKey = new RSVPKey(allStudentIds.get(i), eventCode);
+//                RSVP tempRSVP = new RSVP();
+//                tempRSVP.setRsvpKey(tempRSVPKey);
+//                //RSVPController(rsvpRepository).deleteRSVP(eventCode, studentIds[i]);
+//                rsvpRepository.deleteById(tempRSVPKey);
+//                //rsvpRepository.
+//            }
+////            rsvpController
+////            RSVPController(rsvpRepository).deleteRSVP(eventCode, allStudentIDs[i]);
+//        }
 
-        for(int i = 0; i < allStudentIds.size(); i++)
+        List<RSVP> eventRSVP = repository.findRsvpEvent(eventCode);
+
+        if (!eventRSVP.isEmpty())
         {
-            //Make rsvp key w student id and event code
-
-//            RSVPDto rsvpDto = new RSVPDto();
-//            rsvpDto.setStudentId(123456L); // Set the student ID
-//            rsvpDto.setEventCode(1); // Set the event code
-
-            //replace first allStudentIds with list of student ids from rsvp list
-            if(allStudentIds.contains(allStudentIds.get(i)))
+            for (RSVP rsvp : eventRSVP)
             {
-                //Set up RSVP key, then delete
-                RSVPKey tempRSVPKey = new RSVPKey(allStudentIds.get(i), eventCode);
-                RSVP tempRSVP = new RSVP();
-                tempRSVP.setRsvpKey(tempRSVPKey);
-                //RSVPController(rsvpRepository).deleteRSVP(eventCode, studentIds[i]);
-                rsvpRepository.deleteById(tempRSVPKey);
-                //rsvpRepository.
+                RSVPKey key = rsvp.getRsvpKey();
+                rsvpRepository.deleteById(key);
             }
-//            rsvpController
-//            RSVPController(rsvpRepository).deleteRSVP(eventCode, allStudentIDs[i]);
         }
 
         repository.deleteById(eventCode);
