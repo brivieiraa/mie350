@@ -57,6 +57,7 @@ public class StudentController {
                     student.setFirstName(newStudent.getFirstName());
                     student.setLastName(newStudent.getLastName());
                     student.setEmail(newStudent.getEmail());
+                    student.setUTorId(newStudent.getUTorId());
                     return repository.save(student);
                 })
                 .orElseGet(() -> {
