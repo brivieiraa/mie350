@@ -2,6 +2,7 @@ package com.example.cms.controller;
 
 import com.example.cms.controller.dto.RSVPDto;
 import com.example.cms.controller.exceptions.EventNotFoundException;
+import com.example.cms.controller.exceptions.StudentGroupNotFoundException;
 import com.example.cms.controller.exceptions.StudentNotFoundException;
 import com.example.cms.model.entity.Event;
 import com.example.cms.model.entity.Student;
@@ -31,6 +32,18 @@ public class RSVPController {
     // SEE RSVPS
     @GetMapping("/rsvp")
     List<RSVP> retrieveAllRsvps() { return repository.findAll(); }
+
+//    @GetMapping("/rsvps/{eventCode}")
+//    RSVP retrieveRSVP(@PathVariable("eventCode") Long eventCode) {
+//        return repository.findBy(eventCode)
+//                .orElseThrow(() -> new StudentNotFoundException(eventCode));
+//    }
+
+    // SEE RSVPs given studentID
+    @GetMapping("/rsvp/{studentId}")
+    List<Integer> retrieveAllRsvpsByStudent(@PathVariable("studentId") Long studentId) {
+        return repository.findRSVPbyStudent(studentId);
+    }
 
 //    @GetMapping("/rsvps/{eventCode}")
 //    RSVP retrieveRSVP(@PathVariable("eventCode") Long eventCode) {
