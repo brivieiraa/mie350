@@ -29,7 +29,7 @@ public abstract class Person {
     @NotEmpty
     private String email;
 
-    @Nullable
+    @NotEmpty
     private String uTorId;
 
 }
