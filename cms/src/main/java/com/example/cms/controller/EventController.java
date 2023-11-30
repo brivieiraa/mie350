@@ -59,7 +59,7 @@ public class EventController {
 
     // GET BY CODE
     @GetMapping("/events/{code}")
-    Event retriveEvent(@PathVariable("code") int eventCode) {
+    Event retrieveEvent(@PathVariable("code") int eventCode) {
         return repository.findById(eventCode)
                 .orElseThrow(() -> new EventNotFoundException(eventCode));
     }
