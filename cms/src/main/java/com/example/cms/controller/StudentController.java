@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 // NEEDS COMPLETING //
 @CrossOrigin
@@ -32,7 +33,15 @@ public class StudentController {
 
     @PostMapping("/students")
     Student createStudent(@RequestBody Student newStudent) {
-        return repository.save(newStudent);
+        Long studentId = newStudent.getId();
+        Optional<Student> existingStudent = repository.findById(studentId);
+        if (existingStudent.isPresent()) {
+            // If a student with the same ID already exists, handle it (throw an exception, return an error response, etc.)
+            throw new RuntimeException("Student with ID " + studentId + " already exists.");
+        } else {
+            // If no student with the same ID exists, save the new student
+            return repository.save(newStudent);
+        }
     }
 
     @GetMapping("/students/{id}")
