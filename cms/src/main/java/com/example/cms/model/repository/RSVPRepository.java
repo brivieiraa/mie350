@@ -15,12 +15,6 @@ import java.util.List;
 @Repository
 public interface RSVPRepository extends JpaRepository<RSVP, RSVPKey> {
 
-    //Get list of students registered for specific event
-    @Query(value = "select s.id from students s where " +
-            "id IN (SELECT s.id FROM STUDENTS s INNER JOIN MARKS m ON s.id = m.studentID " +
-            "group by s.id HAVING AVG(Mark) >= 90)", nativeQuery = true)
-    List<Student> findTopStudents();
-
     @Query(value = "SELECT eventCode from rsvps r " +
             "WHERE r.studentId = :studentID", nativeQuery = true)
     List<Integer> findRSVPbyStudent(@Param("studentID") Long studentID);
