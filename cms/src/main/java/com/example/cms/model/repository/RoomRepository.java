@@ -12,10 +12,10 @@ import java.util.List;
 // NEEDS COMPLETING //
 @Repository
 public interface RoomRepository extends JpaRepository<Room, String> {
-    @Query(value = "select * from rooms where :searchTerm = room.building", nativeQuery = true)
+    @Query(value = "select * from rooms where :searchTerm = rooms.building", nativeQuery = true)
     List<Room> searchRoomsInBuilding(@Param("searchTerm") String searchTerm);
 
-    @Query(value = "select * from rooms where :searchTerm2 = room.capacity", nativeQuery = true)
+    @Query(value = "select * from rooms where :searchTerm2 = rooms.capacity", nativeQuery = true)
     List<Room> searchRoomsByCapacity(@Param("searchTerm2") int searchTerm2);
 
 
