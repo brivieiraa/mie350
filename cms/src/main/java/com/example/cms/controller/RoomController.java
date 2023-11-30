@@ -21,7 +21,7 @@ public class RoomController
     }
 
     @GetMapping("/classrooms")
-    List<Room> retreiveAllClassrooms() {
+    List<Room> retrieveAllClassrooms() {
         return repository.findAll();
     }
 

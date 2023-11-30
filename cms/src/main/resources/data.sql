@@ -48,23 +48,6 @@ INSERT INTO events (eventCode, eventName, studentGroup, roomCode, date, duration
 
 INSERT INTO rsvps (studentId, eventCode) VALUES (1001, 1);
 INSERT INTO rsvps (studentId, eventCode) VALUES (1002, 1);
+INSERT INTO rsvps (studentId, eventCode) VALUES (1003, 2);
+INSERT INTO rsvps (studentId, eventCode) VALUES (1007, 8);
 
-/*these will not be used and we can delete*/
-/*
-INSERT INTO marks(studentId, courseCode, mark) VALUES(1111, 'GOT123', 80);
-INSERT INTO marks(studentId, courseCode, mark) VALUES(2222, 'GOT123', 85);
-INSERT INTO marks(studentId, courseCode, mark) VALUES(3333, 'GOT456', 90);
-INSERT INTO marks(studentId, courseCode, mark) VALUES(4444, 'GOT456', 95);
-INSERT INTO marks(studentId, courseCode, mark) VALUES(5555, 'GOT789', 100);
-INSERT INTO marks(studentId, courseCode, mark) VALUES(5555, 'GOT123', 80);
-INSERT INTO marks(studentId, courseCode, mark) VALUES(5555, 'GOT456', 90);
-
-INSERT INTO classrooms(code, capacity) VALUES('GB144', 85);
-INSERT INTO classrooms(code, capacity) VALUES('GB150', 90);
-INSERT INTO classrooms(code, capacity) VALUES('MB123', 100);
-INSERT INTO classrooms(code, capacity) VALUES('BA1130', 300);
-INSERT INTO classrooms(code, capacity) VALUES('MY150', 450);
-INSERT INTO classrooms(code, capacity) VALUES('BA1190', 250);
-INSERT INTO classrooms(code, capacity) VALUES('BA1200', 75);
-INSERT INTO classrooms(code, capacity) VALUES('MP103', 220);
- */
