@@ -9,6 +9,7 @@ INSERT INTO students (id, firstName, lastName, email, uTorId, faculty, major) VA
 
 INSERT INTO administrators (id, firstName, lastName, email, uTorId) VALUES (2001, 'Mark', 'Chignell', 'm.chiggy@mail.utoronto.ca', 'chiggy1');
 INSERT INTO administrators (id, firstName, lastName, email, uTorId) VALUES (2002, 'Janet', 'Lam', 'j.lam@mail.utoronto.ca', 'lam1');
+INSERT INTO administrators (id, firstName, lastName, email, uTorId) VALUES (2003, 'Eldan', 'Cohen', 'e.cohen@mail.utoronto.ca', 'cohen1');
 
 INSERT INTO studentgroups (groupId, name) VALUES (3001, 'Human Factors Interest Group');
 INSERT INTO studentgroups (groupId, name) VALUES (3002, 'Skule Unicycle Club');
