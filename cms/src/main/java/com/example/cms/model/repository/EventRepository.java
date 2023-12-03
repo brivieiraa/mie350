@@ -17,4 +17,8 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     @Query(value = "select studentId from rsvps where eventCode = :code", nativeQuery = true)
     List<Long> findRsvpEvent(@Param("code") int eventCode);
 
+    @Query(value = "SELECT * FROM events " +
+            "WHERE eventCode IN" +
+            "(SELECT eventCode FROM rsvps WHERE studentId = :studentId)", nativeQuery = true)
+    List<Event> findStudentEventsByStudentId(@Param("studentId") long studentId);
 }

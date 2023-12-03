@@ -64,6 +64,12 @@ public class EventController {
                 .orElseThrow(() -> new EventNotFoundException(eventCode));
     }
 
+    // GET EVENTS A STUDENT HAS RSVP'D FOR
+    @GetMapping("/StudentEvents/{studentId}")
+    List<Event> retrieveStudentRSVPEvents(@PathVariable("studentId") long studentId){
+        return repository.findStudentEventsByStudentId(studentId);
+    }
+
     // SEARCH BY MONTH
     // SEARCH BY DATE
     // SEARCH BY CLUB
