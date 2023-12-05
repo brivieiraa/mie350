@@ -53,6 +53,9 @@ public class Event {
     @Nullable
     private int eventCapacity;
 
+    @Nullable
+    private String externalURL;
+
     @OneToMany(mappedBy = "event")
     @Nullable
     private List<RSVP> rsvps = new ArrayList<RSVP>();
